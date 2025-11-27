@@ -73,7 +73,7 @@ public class UserDao {
 		
 		try {
 			Connection conn = Db.getConnection();
-			String sqlStatement = "SELECT id, display_name, password FROM user WHERE username = ? LIMIT 1";
+			String sqlStatement = "SELECT id, display_name, password, role_id FROM user WHERE username = ? LIMIT 1";
 			PreparedStatement stmt = conn.prepareStatement(sqlStatement);
 			
 			stmt.setString(1, userLoginData.getUsername());
@@ -91,6 +91,7 @@ public class UserDao {
 					code = "LOGIN_SUCCESS";
 					responseData.put("userId", rs.getInt("id"));
 					responseData.put("displayName", rs.getString("display_name"));
+					responseData.put("roleId", rs.getInt("role_id"));
 				} else {
 					success = false;
 					code = "LOGIN_INCORRECT_PASSWORD";
