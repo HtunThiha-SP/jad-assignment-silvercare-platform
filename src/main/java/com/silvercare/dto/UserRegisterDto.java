@@ -6,7 +6,7 @@ public class UserRegisterDto {
 	private String email;
 	private String password;
 	
-	public UserRegisterDto(String username, String displayName, String email, String password) {
+	public UserRegisterDto(String username, String email, String displayName, String password) {
 		this.username = username;
 		this.displayName = displayName;
 		if(displayName.equals("") || displayName == null) {
