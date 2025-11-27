@@ -31,7 +31,8 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= (request.getRequestURI().endsWith("serviceCategories.jsp") || 
-        		  request.getRequestURI().endsWith("services.jsp")) ? "active" : "" %>" role="button" data-bs-toggle="dropdown">
+        		  request.getRequestURI().endsWith("services.jsp") ||
+        		  request.getRequestURI().endsWith("serviceDetails.jsp")) ? "active" : "" %>" role="button" data-bs-toggle="dropdown">
             <i class="bi bi-postcard-heart"></i>&ensp;&nbsp;Care Services
           </a>
           <ul class="dropdown-menu">

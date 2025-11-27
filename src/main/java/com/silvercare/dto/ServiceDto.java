@@ -9,6 +9,8 @@ public class ServiceDto {
     private String durationStr;
     private String createdTime;
     private String lastUpdatedTime;
+    
+    public ServiceDto() { }
 
     public ServiceDto(String name, String title, String description, double price, int imgIndex,
                       String durationStr, String createdTime, String lastUpdatedTime) {

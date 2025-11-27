@@ -10,4 +10,8 @@ public class ServiceManager {
 	public static List<ServiceDto> getServicesByCategoryName(String name) {
 		return ServiceDao.selectServicesByCategoryName(name);
 	}
+	
+	public static ServiceDto getServiceByName(String serviceName) {
+		return ServiceDao.selectServiceByName(serviceName);
+	}
 }

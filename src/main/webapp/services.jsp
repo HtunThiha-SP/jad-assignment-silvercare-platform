@@ -70,7 +70,7 @@
 				        String name = service.getName();
 				        String title = service.getTitle();
 				        String imgUrl = "./img/service-" + service.getImgIndex() + "-banner.png";
-				        String redirectUrl = "./service.jsp?category=" + service.getName();
+				        String redirectUrl = "./serviceDetails.jsp?name=" + service.getName();
 				
 				        out.print(
 				            "<div class='col-10 col-xl-9'>"
