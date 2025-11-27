@@ -30,21 +30,21 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <%= request.getRequestURI().endsWith("serviceCategories.jsp") ? "active" : "" %>" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle <%= (request.getRequestURI().endsWith("serviceCategories.jsp") || 
+        		  request.getRequestURI().endsWith("services.jsp")) ? "active" : "" %>" role="button" data-bs-toggle="dropdown">
             <i class="bi bi-postcard-heart"></i>&ensp;&nbsp;Care Services
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">All service categories</a></li>
+            <li><a class="dropdown-item" href="./serviceCategories.jsp">All service categories</a></li>
             <li><hr class="dropdown-divider"></li>
             <!-- adds service category names to dropdown list -->
             <%
             	for(ServiceCategory serviceCategory : ServiceCategoryManager.getAllServiceCategories()) {
             		String name = serviceCategory.getName();
-            		out.println("<li><a class=\"dropdown-item\" href=\"./serviceCategory.jsp?name=\""
-            				+ name + "\">" + name + "</a></li>");
+            		out.println("<li><a class=\"dropdown-item\" href=\"./services.jsp?category=" 
+            	            + name + "\">" + name + "</a></li>");
             	}
             %>
-            <li><a class="dropdown-item" href="#">Example service</a></li>
           </ul>
         </li>
 
