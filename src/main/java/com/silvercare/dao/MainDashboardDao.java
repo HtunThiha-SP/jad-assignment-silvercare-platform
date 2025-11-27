@@ -2,12 +2,12 @@ package com.silvercare.dao;
 
 import java.sql.*;
 
-import com.silvercare.dto.AdminDashboardDto;
+import com.silvercare.dto.MainDashboardDto;
 import com.silvercare.util.Db;
 
-public class AdminDashboardDao {
-    public static AdminDashboardDto selectMainDashboardData() {
-        var adminDashboardData = new AdminDashboardDto();
+public class MainDashboardDao {
+    public static MainDashboardDto selectMainDashboardData() {
+        var adminDashboardData = new MainDashboardDto();
         try {
         	Connection conn = Db.getConnection();
 

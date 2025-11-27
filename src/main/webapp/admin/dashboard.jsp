@@ -1,8 +1,8 @@
-<%@page import="com.silvercare.dao.AdminDashboardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.silvercare.dto.AdminDashboardDto" %>
-<%@ page import="com.silvercare.service.AdminDashboardManager" %>
+<%@page import="com.silvercare.dao.MainDashboardDao"%>
+<%@ page import="com.silvercare.dto.MainDashboardDto" %>
+<%@ page import="com.silvercare.service.DashboardManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
     <%@ include file="../components/verifyAdminStatus.jsp" %>
     
     <%
-    	var adminDashboardData = AdminDashboardDao.selectMainDashboardData();
+    	var adminDashboardData = MainDashboardDao.selectMainDashboardData();
     	int userCount = adminDashboardData.getUserCount();
     	int bookingCount = adminDashboardData.getAppointmentCount();
     	double currentMonthlyRevenue = adminDashboardData.getMonthlyIncome();

@@ -1,14 +1,14 @@
 package com.silvercare.dto;
 
-public class AdminDashboardDto {
+public class MainDashboardDto {
     private int userCount;
     private int appointmentCount;
     private double monthlyIncome;
     private String topServiceCategory;
     
-    public AdminDashboardDto() { }
+    public MainDashboardDto() { }
 
-	public AdminDashboardDto(int userCount, int appointmentCount, double monthlyIncome, String topServiceCategory) {
+	public MainDashboardDto(int userCount, int appointmentCount, double monthlyIncome, String topServiceCategory) {
 		this.userCount = userCount;
 		this.appointmentCount = appointmentCount;
 		this.monthlyIncome = monthlyIncome;
