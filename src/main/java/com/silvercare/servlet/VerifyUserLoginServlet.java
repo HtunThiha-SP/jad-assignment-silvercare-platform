@@ -43,6 +43,7 @@ public class VerifyUserLoginServlet extends HttpServlet {
 		if(loginResponse.isSuccess()) {
 			session.setAttribute("userId", ((Map<String, Object>) loginResponse.getResponseData()).get("userId"));
 			session.setAttribute("displayName", ((Map<String, Object>) loginResponse.getResponseData()).get("displayName"));
+			session.setAttribute("roleId", ((Map<String, Object>) loginResponse.getResponseData()).get("roleId"));
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
