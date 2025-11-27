@@ -1,0 +1,13 @@
+# Eclipse Java EE config files
+.settings/
+build/
+.classpath
+.project
+
+# IntelliJ and VS Code config files
+.idea
+.vscode
+
+# env variables and config properties
+.env
+*.properties
