@@ -1,5 +1,8 @@
+<%@page import="com.silvercare.dao.AdminDashboardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.silvercare.dto.AdminDashboardDto" %>
+<%@ page import="com.silvercare.service.AdminDashboardManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,14 @@
 <body style="background-color: #F5F5F5;">
     <%@ include file="../components/sessionTimeout.jsp" %>
     <%@ include file="../components/verifyAdminStatus.jsp" %>
+    
+    <%
+    	var adminDashboardData = AdminDashboardDao.selectMainDashboardData();
+    	int userCount = adminDashboardData.getUserCount();
+    	int bookingCount = adminDashboardData.getAppointmentCount();
+    	double currentMonthlyRevenue = adminDashboardData.getMonthlyIncome();
+    	String topServiceCategory = adminDashboardData.getTopServiceCategory();
+    %>
 
     <div class="container mt-5 mb-5">
         <div class="row mb-4">
@@ -24,7 +35,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-person-check-fill"></i>&ensp;Total Users</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">124</h4>
+                        <h4 style="font-weight:700; color:#1D3142;"><%= userCount %></h4>
                     </div>
                 </div>
             </div>
@@ -33,7 +44,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-ui-checks"></i>&ensp;Total Bookings</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">58</h4>
+                        <h4 style="font-weight:700; color:#1D3142;"><%= bookingCount %></h4>
                     </div>
                 </div>
             </div>
@@ -42,7 +53,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-cash"></i>&ensp;Current Monthly Revenue</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">$4,830</h4>
+                        <h4 style="font-weight:700; color:#1D3142;">$<%= currentMonthlyRevenue %></h4>
                     </div>
                 </div>
             </div>
@@ -51,7 +62,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-tag-fill"></i>&ensp;Top Service Category</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">Home Nursing</h4>
+                        <h5 style="font-weight:700; color:#1D3142;"><%= topServiceCategory %></h5>
                     </div>
                 </div>
             </div>
