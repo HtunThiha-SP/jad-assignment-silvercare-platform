@@ -48,6 +48,12 @@
             %>
           </ul>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link <%= request.getRequestURI().endsWith("serviceReviews.jsp") ? "active" : "" %>" href="./serviceReviews.jsp">
+            <i class="bi bi-star-fill"></i>&ensp;&nbsp;Reviews
+          </a>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link <%= request.getRequestURI().endsWith("newsUpdates.jsp") ? "active" : "" %>" href="./newsUpdates.jsp">
