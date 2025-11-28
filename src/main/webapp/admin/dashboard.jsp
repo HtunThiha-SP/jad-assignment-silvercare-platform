@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.silvercare.dao.MainDashboardDao"%>
 <%@ page import="com.silvercare.dto.MainDashboardDto" %>
-<%@ page import="com.silvercare.service.DashboardManager" %>
+<%@ page import="com.silvercare.controller.DashboardController" %>
 <!DOCTYPE html>
 <html>
 <head>

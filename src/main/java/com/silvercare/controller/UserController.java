@@ -1,4 +1,4 @@
-package com.silvercare.service;
+package com.silvercare.controller;
 
 import com.silvercare.dao.UserDao;
 import com.silvercare.dto.UserLoginDto;
@@ -6,7 +6,7 @@ import com.silvercare.dto.UserRegisterDto;
 import com.silvercare.util.OperationResponse;
 import com.silvercare.util.PasswordUtil;
 
-public class UserManager {
+public class UserController {
 	public static OperationResponse register(String username, String email, String displayName, String password) {
 		boolean success = false;
 		String message = "";

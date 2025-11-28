@@ -1,4 +1,4 @@
-package com.silvercare.service;
+package com.silvercare.controller;
 
 
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import com.silvercare.dao.ServiceDao;
 import com.silvercare.dto.ServiceDto;
 
-public class ServiceManager {
+public class ServiceController {
 	public static List<ServiceDto> getServicesByCategoryName(String name) {
 		return ServiceDao.selectServicesByCategoryName(name);
 	}

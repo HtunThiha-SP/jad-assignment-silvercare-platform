@@ -1,7 +1,7 @@
 <%@ page import="com.silvercare.model.ServiceCategory" %>
-<%@ page import="com.silvercare.service.ServiceCategoryManager" %>
+<%@ page import="com.silvercare.controller.ServiceCategoryController" %>
 <%@ page import="com.silvercare.dto.ServiceDto" %>
-<%@ page import="com.silvercare.service.ServiceManager" %>
+<%@ page import="com.silvercare.controller.ServiceController" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 		String descriptionContent = "";
 		String pageBtnVisibility = "";
 		boolean serviceFound = false;
-		for(ServiceCategory serviceCategoryData : ServiceCategoryManager.getAllServiceCategories()) {
+		for(ServiceCategory serviceCategoryData : ServiceCategoryController.getAllServiceCategories()) {
 			String name = serviceCategoryData.getName();
 			if(serviceCategoryNameParam.equals(name)){
 				serviceFound = true;
@@ -55,7 +55,7 @@
 				        catch (Exception e) { currentPage = 1; }
 				    }
 				
-				    var allServices = ServiceManager.getServicesByCategoryName(serviceCategoryNameParam);
+				    var allServices = ServiceController.getServicesByCategoryName(serviceCategoryNameParam);
 				    int totalServices = allServices.size();
 				    int totalPages = (int) Math.ceil((double) totalServices / pageSize);
 				
