@@ -30,16 +30,16 @@
             <img src="./img/service-<%= imgIndex %>-banner.png" class="img-fluid rounded" alt="Service Image">
         </div>
         <div class="col-12 col-md-6">
-            <h3 id="serviceName"><%= name %></h3>
+            <h3 id="serviceName"><i class="bi bi-clipboard-heart"></i>&ensp;<%= name %></h3>
             <p id="serviceDescription">
 				<%= description %>
             </p>
             <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item"><strong><span id="serviceTitle"><%= title %></span></strong></li>
-                <li class="list-group-item"><strong>Price:</strong> $<span id="servicePrice"><%= price %></span></li>
-                <li class="list-group-item"><strong>Duration:</strong> <span id="serviceDuration"><%= duration %></span></li>
-                <li class="list-group-item"><strong>Service Offered On:</strong> <span id="serviceCreated"><%= createdTime %></span></li>
-                <li class="list-group-item"><strong>Last Updated:</strong> <span id="serviceUpdated"><%= updatedTime %></span></li>
+                <li class="list-group-item"><strong><span id="serviceTitle"><i class="bi bi-emoji-heart-eyes"></i>&ensp;<%= title %></span></strong></li>
+                <li class="list-group-item"><strong><i class="bi bi-cash-coin"></i>&ensp;Price:</strong> $<span id="servicePrice"><%= price %></span></li>
+                <li class="list-group-item"><strong><i class="bi bi-stopwatch"></i>&ensp;Duration:</strong> <span id="serviceDuration"><%= duration %></span></li>
+                <li class="list-group-item"><strong><i class="bi bi-calendar2-week"></i>&ensp;Service Offered On:</strong> <span id="serviceCreated"><%= createdTime %></span></li>
+                <li class="list-group-item"><strong><i class="bi bi-calendar2-week"></i>&ensp;Last Updated:</strong> <span id="serviceUpdated"><%= updatedTime %></span></li>
             </ul>
         </div>
     </div>

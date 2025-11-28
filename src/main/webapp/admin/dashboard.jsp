@@ -53,7 +53,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-cash"></i>&ensp;Current Monthly Revenue</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">$<%= currentMonthlyRevenue %></h4>
+                        <h4 style="font-weight:700; color:#1D3142;">$&ensp;<%= currentMonthlyRevenue %></h4>
                     </div>
                 </div>
             </div>
