@@ -3,6 +3,8 @@
 <%@ page import="com.silvercare.controller.UserController" %>
 <%@ page import="com.silvercare.dto.UserUpdateDto" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.silvercare.dto.BookingDto" %>
+<%@ page import="com.silvercare.controller.BookingController" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,10 +244,7 @@
                         <h5 class="mb-0">
                             <i class="bi bi-calendar-check-fill"></i>&ensp;My Bookings
                         </h5>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-outline-secondary active">Upcoming</button>
-                            <button type="button" class="btn btn-outline-secondary">Past</button>
-                        </div>
+
                     </div>
 
                     <div class="table-responsive">
@@ -260,39 +259,39 @@
                                     <th>Total (SGD)</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Personal Care Session (1 hour)</td>
-                                    <td>In-home Care</td>
-                                    <td>12 Dec 2025, 10:00 AM</td>
-                                    <td><span class="badge bg-success">Confirmed</span></td>
-                                    <td>$90.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Medical Appointment Transport</td>
-                                    <td>Transportation &amp; Meal Delivery</td>
-                                    <td>15 Dec 2025, 2:30 PM</td>
-                                    <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                    <td>$40.00</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Home Exercise &amp; Mobility Session</td>
-                                    <td>Lifestyle Wellness Support</td>
-                                    <td>20 Dec 2025, 5:00 PM</td>
-                                    <td><span class="badge bg-secondary">Completed</span></td>
-                                    <td>$60.00</td>
-                                </tr>
-                            </tbody>
+								<tbody>
+								<%
+								    int index = 1;
+								    for (BookingDto booking : BookingController.getAllBookingsByUserId(sessionUserId)) {
+								%>
+								    <tr>
+								        <td><%= index++ %></td>
+								        <td><%= booking.serviceName() %></td>
+								        <td><%= booking.category() %></td>
+								        <td><%= booking.appointmentTime() %></td>
+								        <td>
+								            <%
+								                String status = booking.status();
+										            String badgeClass = "bg-info";
+										            if ("confirmed".equalsIgnoreCase(status)) {
+										                badgeClass = "bg-success";
+										            } else if ("pending".equalsIgnoreCase(status)) {
+										                badgeClass = "bg-warning text-dark";
+										            } else if ("completed".equalsIgnoreCase(status)) {
+										                badgeClass = "bg-secondary";
+										            }
+								            %>
+								            <span class="badge <%= badgeClass %>"><%= status %></span>
+								        </td>
+								        <td>$<%= String.format("%.2f", booking.price()) %></td>
+								    </tr>
+								<%
+								    }
+								%>
+								</tbody>
                         </table>
                     </div>
 
-                    <p class="text-muted mt-3 mb-0" style="font-size: 13px;">
-                        These are sample entries for layout preview. Once booking features are implemented,
-                        this section will automatically show your real bookings.
-                    </p>
                 </div>
             </div>
         </div>

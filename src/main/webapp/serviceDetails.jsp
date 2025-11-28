@@ -64,6 +64,19 @@
         		          + "</div>");
         	}
         %>
+<%
+    Integer userId = (Integer) session.getAttribute("userId");
+    if (userId != null) {
+%>
+    <form action="./add-cart-item" method="post">
+        <input type="hidden" name="serviceName" value="<%= serviceName %>">
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+<%
+    }
+%>
+
+
     </div>
 </div>
 <%@ include file="./components/footer.html" %>
