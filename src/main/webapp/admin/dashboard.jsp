@@ -17,7 +17,7 @@
     <%
     	var adminDashboardData = MainDashboardDao.selectMainDashboardData();
     	int userCount = adminDashboardData.getUserCount();
-    	int bookingCount = adminDashboardData.getAppointmentCount();
+    	int bookingCount = adminDashboardData.getBookingCount();
     	double currentMonthlyRevenue = adminDashboardData.getMonthlyIncome();
     	String topServiceCategory = adminDashboardData.getTopServiceCategory();
     %>
@@ -53,7 +53,7 @@
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
                         <h6 class="text-muted"><i class="bi bi-cash"></i>&ensp;Current Monthly Revenue</h6>
-                        <h4 style="font-weight:700; color:#1D3142;">$<%= currentMonthlyRevenue %></h4>
+                        <h4 style="font-weight:700; color:#1D3142;">$&ensp;<%= currentMonthlyRevenue %></h4>
                     </div>
                 </div>
             </div>
@@ -110,14 +110,14 @@
             <div class="col-md-6">
                 <div class="card shadow-sm" style="border-radius: 16px;">
                     <div class="card-body">
-                        <h5 class="card-title">Manage Booking Appointments</h5>
+                        <h5 class="card-title">Manage booking appointments</h5>
                         <p class="card-text" style="font-size: 14px;">
-                            View, edit, and approve customer booking appointments.
+                            View, edit, and approve customer Booking appointments.
                         </p>
                         <button class="btn"
                                 style="background-color:#2C2C2C; color:white;"
-                                onclick="window.location.href='<%= request.getContextPath() %>/appointments.jsp'">
-                            Go to Appointments
+                                onclick="window.location.href='<%= request.getContextPath() %>/Bookings.jsp'">
+                            Go to Bookings
                         </button>
                     </div>
                 </div>

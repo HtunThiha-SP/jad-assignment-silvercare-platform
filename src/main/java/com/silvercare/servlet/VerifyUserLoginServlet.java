@@ -40,13 +40,19 @@ public class VerifyUserLoginServlet extends HttpServlet {
 		
 		session.setAttribute("loginSuccess", loginResponse.isSuccess());
 		session.setAttribute("message", loginResponse.getMessage());
+		
+		int roleId = (Integer) ((Map<String, Object>) loginResponse.getResponseData()).get("roleId");
 
 		if(loginResponse.isSuccess()) {
 			session.setAttribute("userId", ((Map<String, Object>) loginResponse.getResponseData()).get("userId"));
 			session.setAttribute("displayName", ((Map<String, Object>) loginResponse.getResponseData()).get("displayName"));
-			session.setAttribute("roleId", ((Map<String, Object>) loginResponse.getResponseData()).get("roleId"));
+			session.setAttribute("roleId", roleId);
 		}
 		
+		if(roleId == 2) {
+			response.sendRedirect(request.getContextPath() + "/admin/dashboard.jsp");
+			return;
+		}
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 
