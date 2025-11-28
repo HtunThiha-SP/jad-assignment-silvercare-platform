@@ -2,6 +2,7 @@ package com.silvercare.dao;
 
 import com.silvercare.dto.UserLoginDto;
 import com.silvercare.dto.UserRegisterDto;
+import com.silvercare.dto.UserUpdateDto;
 import com.silvercare.util.Db;
 import com.silvercare.util.OperationResponse;
 import com.silvercare.util.PasswordUtil;
@@ -18,7 +19,7 @@ public class UserDao {
 		
 		try {
 			Connection conn = Db.getConnection();
-			String sqlStatement = "INSERT INTO user(username, email, display_name, password, role_id)"
+			String sqlStatement = "INSERT INTO user(username, email, display_name, password, role_id) "
 					+ "VALUES (?, ?, ?, ?, 1)";
 			PreparedStatement stmt = conn.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS);
 			
@@ -113,5 +114,152 @@ public class UserDao {
 		}
 		
 		return new OperationResponse(success, message, code, responseData);
+	}
+	
+    public static UserUpdateDto selectUserById(Integer userId) {
+        String username = "";
+        String email = "";
+        String displayName = "";
+        try {
+            Connection conn = Db.getConnection();
+            String sqlStatement = "SELECT username, email, display_name FROM user "
+                                + "WHERE id = ? LIMIT 1";
+            PreparedStatement stmt = conn.prepareStatement(sqlStatement);
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                username = rs.getString("username");
+                email = rs.getString("email");
+                displayName = rs.getString("display_name");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException at UserDao.selectUserById");
+            System.out.println("SQL Error Code: " + e.getErrorCode());
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("SQL Message: " + e.getMessage());
+        }
+
+        return new UserUpdateDto(username, email, displayName);
+    }
+
+	public static OperationResponse updateUserByUserId(UserUpdateDto userUpdateData, Integer userId) {
+		boolean success = false;
+		String message = "";
+		String code = "";
+		
+		try {
+			Connection conn = Db.getConnection();
+			String sqlStatement = "UPDATE user "
+					+ "SET username = ?, email = ?, display_name = ? "
+					+ "WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sqlStatement);
+			
+			stmt.setString(1, userUpdateData.getUsername());
+			stmt.setString(2, userUpdateData.getEmail());
+			stmt.setString(3, userUpdateData.getDisplayName());
+			stmt.setInt(4, userId);
+			
+			int rowsAffected = stmt.executeUpdate();
+			
+			if(rowsAffected == 1) {
+				success = true;
+				code = "USER_UPDATE_SUCCESS";
+			} else {
+				success = false;
+				code = "UPDATE_UNKNOWN_ERROR";
+			}
+			
+			conn.close();
+		} catch(SQLException e) {
+	        System.out.println("SQLException at UserDao.updateUserByUserId");
+	        System.out.println("SQL Error Code: " + e.getErrorCode());
+	        System.out.println("SQL State: " + e.getSQLState());
+	        System.out.println("SQL Message: " + e.getMessage());
+
+			success = false;
+	        if (e.getErrorCode() == 1062) {
+	            if (e.getMessage().contains("username")) {
+	                code = "UPDATE_DUPLICATE_USERNAME";
+	            } else if (e.getMessage().contains("email")) {
+	                code = "UPDATE_DUPLICATE_EMAIL";
+	            } else {
+	            	code = "UPDATE_UNKNOWN_ERROR";
+	            }
+	        } else {
+	        	code = "UPDATE_UNKNOWN_ERROR";
+	        }
+		}
+		
+		return new OperationResponse(success, message, code);
+	}
+	
+	public static OperationResponse updateUserPasswordByUserId(String oldPassword, String newPassword, Integer userId) {
+		boolean success = false;
+		String message = "";
+		String code = "";
+		
+		try {
+			Connection conn = Db.getConnection();
+			String getOldPasswordSql = "SELECT password FROM user "
+					+ "WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(getOldPasswordSql);
+			stmt.setInt(1, userId);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				String dbHash = rs.getString("password");
+				
+				boolean isCorrectPassword = PasswordUtil.verifyPassword(oldPassword, dbHash);
+				
+				if(isCorrectPassword) {
+					success = true;
+					code = "UPDATE_SUCCESS";
+					
+					String newHash = PasswordUtil.hashPassword(newPassword);
+					PreparedStatement newHashUpdate = conn.prepareStatement("UPDATE user "
+							+ "SET password = ? WHERE id = ?");
+					newHashUpdate.setString(1, newHash);
+					newHashUpdate.setInt(2, userId);
+					
+					int rowsAffected = newHashUpdate.executeUpdate();
+					
+					if(rowsAffected == 1) {
+						success = true;
+						code = "PASSWORD_UPDATE_SUCCESS";
+					} else {
+						success = false;
+						code = "UPDATE_UNKNOWN_ERROR";
+					}
+				} else {
+					success = false;
+					code = "UPDATE_INCORRECT_PASSWORD";
+				}
+			}
+			
+			conn.close();
+		} catch(SQLException e) {
+	        System.out.println("SQLException at UserDao.updateUserPasswordByUserId");
+	        System.out.println("SQL Error Code: " + e.getErrorCode());
+	        System.out.println("SQL State: " + e.getSQLState());
+	        System.out.println("SQL Message: " + e.getMessage());
+
+			success = false;
+	        if (e.getErrorCode() == 1062) {
+	            if (e.getMessage().contains("username")) {
+	                code = "UPDATE_DUPLICATE_USERNAME";
+	            } else if (e.getMessage().contains("email")) {
+	                code = "UPDATE_DUPLICATE_EMAIL";
+	            } else {
+	            	code = "UPDATE_UNKNOWN_ERROR";
+	            }
+	        } else {
+	        	code = "UPDATE_UNKNOWN_ERROR";
+	        }
+		}
+		
+		return new OperationResponse(success, message, code);
 	}
 }

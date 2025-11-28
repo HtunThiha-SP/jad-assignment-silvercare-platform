@@ -5,22 +5,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
+import java.util.Map;
 
 import com.silvercare.controller.UserController;
 
 /**
- * Servlet implementation class VerifyLoginServlet
+ * Servlet implementation class UserUpdateServlet
  */
-@WebServlet("/register")
-public class RegisterAccountServlet extends HttpServlet {
+@WebServlet("/update-user-profile")
+public class UserUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterAccountServlet() {
+    public UserUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,28 +28,28 @@ public class RegisterAccountServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
-		String email = request.getParameter("email");
 		String displayName = request.getParameter("displayName");
-		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		Integer userId = (Integer) request.getSession().getAttribute("userId");
 		
         if (displayName == null || displayName.isEmpty()) {
             displayName = username;
         }
 		
-		var registerResponse = UserController.register(username, email, displayName, password);
+		var updateResponse = UserController.updateUserProfile(username, email, displayName, userId);
 		var session = request.getSession();
 		
-		session.setAttribute("registerSuccess", registerResponse.isSuccess());
-		session.setAttribute("message", registerResponse.getMessage());
+		session.setAttribute("updateSuccess", updateResponse.isSuccess());
+		session.setAttribute("message", updateResponse.getMessage());
 
-		if(registerResponse.isSuccess()) {
-			session.setAttribute("userId", registerResponse.getResponseData());
+		if(updateResponse.isSuccess()) {
 			session.setAttribute("displayName", displayName);
 		}
-		
-		response.sendRedirect(request.getContextPath() + "/register.jsp");
+
+		response.sendRedirect(request.getContextPath() + "/profile.jsp");
 	}
 
 }
