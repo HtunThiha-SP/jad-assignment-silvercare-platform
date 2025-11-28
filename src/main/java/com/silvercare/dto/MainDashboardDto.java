@@ -2,15 +2,15 @@ package com.silvercare.dto;
 
 public class MainDashboardDto {
     private int userCount;
-    private int appointmentCount;
+    private int bookingCount;
     private double monthlyIncome;
     private String topServiceCategory;
     
     public MainDashboardDto() { }
 
-	public MainDashboardDto(int userCount, int appointmentCount, double monthlyIncome, String topServiceCategory) {
+	public MainDashboardDto(int userCount, int bookingCount, double monthlyIncome, String topServiceCategory) {
 		this.userCount = userCount;
-		this.appointmentCount = appointmentCount;
+		this.bookingCount = bookingCount;
 		this.monthlyIncome = monthlyIncome;
 		this.topServiceCategory = topServiceCategory;
 	}
@@ -23,12 +23,12 @@ public class MainDashboardDto {
 		this.userCount = userCount;
 	}
 
-	public int getAppointmentCount() {
-		return appointmentCount;
+	public int getBookingCount() {
+		return bookingCount;
 	}
 
-	public void setAppointmentCount(int appointmentCount) {
-		this.appointmentCount = appointmentCount;
+	public void setBookingCount(int bookingCount) {
+		this.bookingCount = bookingCount;
 	}
 
 	public double getMonthlyIncome() {
