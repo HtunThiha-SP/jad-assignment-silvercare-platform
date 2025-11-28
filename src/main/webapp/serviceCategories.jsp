@@ -1,5 +1,5 @@
 <%@ page import="com.silvercare.model.ServiceCategory" %>
-<%@ page import="com.silvercare.service.ServiceCategoryManager" %>
+<%@ page import="com.silvercare.controller.ServiceCategoryController" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
             <div class="col-12 col-sm-10">
                 <div class="row gx-5 gy-4 justify-content-center">
 				<%
-					for(ServiceCategory serviceCategory : ServiceCategoryManager.getAllServiceCategories()) {
+					for(ServiceCategory serviceCategory : ServiceCategoryController.getAllServiceCategories()) {
 					    String name = serviceCategory.getName();
 					    String description = serviceCategory.getDescription();
 					    String imgUrl = "./img/service-category" + serviceCategory.getImgIndex() + "-banner.png";

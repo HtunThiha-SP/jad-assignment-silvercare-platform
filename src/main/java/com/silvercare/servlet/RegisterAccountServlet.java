@@ -5,9 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.silvercare.service.UserManager;
 
 import java.io.IOException;
+
+import com.silvercare.controller.UserController;
 
 /**
  * Servlet implementation class VerifyLoginServlet
@@ -33,7 +34,7 @@ public class RegisterAccountServlet extends HttpServlet {
 		String displayName = request.getParameter("displayName");
 		String password = request.getParameter("password");
 		
-		var registerResponse = UserManager.register(username, email, displayName, password);
+		var registerResponse = UserController.register(username, email, displayName, password);
 		var session = request.getSession();
 		
 		session.setAttribute("registerSuccess", registerResponse.isSuccess());

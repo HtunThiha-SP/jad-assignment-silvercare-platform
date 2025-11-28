@@ -1,4 +1,4 @@
-<%@ page import="com.silvercare.service.UserManager" %>
+<%@ page import="com.silvercare.controller.UserController" %>
 <%
 	Integer sessionRoleId = (Integer) session.getAttribute("roleId");
 

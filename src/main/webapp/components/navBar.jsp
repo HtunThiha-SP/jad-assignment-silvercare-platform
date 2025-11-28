@@ -1,5 +1,5 @@
 <%@ page import="com.silvercare.model.ServiceCategory" %>
-<%@ page import="com.silvercare.service.ServiceCategoryManager" %>
+<%@ page import="com.silvercare.controller.ServiceCategoryController" %>
 <style>
   .nav-item, .navbar-brand {
     padding-right: 20px;
@@ -40,7 +40,7 @@
             <li><hr class="dropdown-divider"></li>
             <!-- adds service category names to dropdown list -->
             <%
-            	for(ServiceCategory serviceCategory : ServiceCategoryManager.getAllServiceCategories()) {
+            	for(ServiceCategory serviceCategory : ServiceCategoryController.getAllServiceCategories()) {
             		String name = serviceCategory.getName();
             		out.println("<li><a class=\"dropdown-item\" href=\"./services.jsp?category=" 
             	            + name + "\">" + name + "</a></li>");
